@@ -1,0 +1,13 @@
+@model GuestResponse
+
+<a href="/Dashboard">Dashboard</a>
+<h1>@ViewBag.WeddingDetail.WedderOne & @ViewBag.WeddingDetail.WedderTwo</h1>
+<p>Date: @ViewBag.WeddingDetail.Date.ToString("MMMM dd yyyy")</p>
+
+<p>Guests: </p>
+<ul>
+    @foreach (var wedding in @ViewBag.WeddingDetail.GuestReponses)
+    {
+        <li>@wedding.Guest.FirstName @wedding.Guest.LastName</li>
+    }
+</ul>
