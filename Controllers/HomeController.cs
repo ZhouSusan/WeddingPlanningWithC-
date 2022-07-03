@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using CSharpWeddingPlanner.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace CSharpWeddingPlanner.Controllers
 {
