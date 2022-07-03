@@ -92,91 +92,91 @@ namespace CSharpWeddingPlanner.Controllers
                 return View("Dashboard", AllWeddings);
         }
 
-        // [HttpGet("/NewWedding")]
-        // public IActionResult NewWedding()
-        // {
-        //     if (HttpContext.Session.GetInt32("UserId") == null)
-        //     {
-        //         return RedirectToAction("Index");
-        //     }
+        [HttpGet("/NewWedding")]
+        public IActionResult NewWedding()
+        {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToAction("Index");
+            }
 
-        //     return View("Planner");
-        // }
+            return View("Planner");
+        }
 
-        // [HttpPost("/RVSP/{WeddingID}")]
-        // public IActionResult RSVP(GuestResponse newGuestResponse, int WeddingID, int UserId, bool existingRSVP)
-        // {
-        //     int ? userId = HttpContext.Session.GetInt32("UserId");
-        //     if (userId != null)
-        //     {
-        //         if(existingRSVP){
-        //             newGuestResponse.UserId = (int)HttpContext.Session.GetInt32("UserId");
-        //             newGuestResponse = db.GuestResponses.FirstOrDefault(g => g.WeddingId == WeddingID && g.UserId == newGuestResponse.UserId);
-        //             db.GuestResponses.Remove(newGuestResponse);
-        //             db.SaveChanges();
-        //             return RedirectToAction("Dashboard");
+        [HttpPost("/RVSP/{WeddingID}")]
+        public IActionResult RSVP(GuestResponse newGuestResponse, int WeddingID, int UserId, bool existingRSVP)
+        {
+            int ? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId != null)
+            {
+                if(existingRSVP){
+                    newGuestResponse.UserId = (int)HttpContext.Session.GetInt32("UserId");
+                    newGuestResponse = db.GuestResponses.FirstOrDefault(g => g.WeddingId == WeddingID && g.UserId == newGuestResponse.UserId);
+                    db.GuestResponses.Remove(newGuestResponse);
+                    db.SaveChanges();
+                    return RedirectToAction("Dashboard");
 
-        //         } else {
-        //             Wedding currentWedding = db.Weddings.Include(w => w.GuestReponses).ThenInclude(u => u.Guest).FirstOrDefault(cw => cw.WeddingId == WeddingID);
+                } else {
+                    Wedding currentWedding = db.Weddings.Include(w => w.GuestReponses).ThenInclude(u => u.Guest).FirstOrDefault(cw => cw.WeddingId == WeddingID);
 
-        //             newGuestResponse.WeddingId = currentWedding.WeddingId; 
-        //             newGuestResponse.UserId =(int) HttpContext.Session.GetInt32("UserId");
-        //             db.Add(newGuestResponse);
-        //             db.SaveChanges();
-        //             return RedirectToAction("Dashboard");
-        //         }
-        //     }
-        //     return View("Index");
-        // }
+                    newGuestResponse.WeddingId = currentWedding.WeddingId; 
+                    newGuestResponse.UserId =(int) HttpContext.Session.GetInt32("UserId");
+                    db.Add(newGuestResponse);
+                    db.SaveChanges();
+                    return RedirectToAction("Dashboard");
+                }
+            }
+            return View("Index");
+        }
 
-        // [HttpPost("/Delete/{WeddingID}")]
-        // public IActionResult Delete(int WeddingID)
-        // {
-        //     int? userId = HttpContext.Session.GetInt32("UserId");
-        //     if (userId != null)
-        //     {
-        //         Wedding getWedding = db.Weddings.FirstOrDefault(w => w.WeddingId == WeddingID);
-        //         db.Weddings.Remove(getWedding);
-        //         db.SaveChanges();
-        //         return RedirectToAction("Dashboard");
-        //     }
-        //     return View("Index");
-        // }
+        [HttpPost("/Delete/{WeddingID}")]
+        public IActionResult Delete(int WeddingID)
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId != null)
+            {
+                Wedding getWedding = db.Weddings.FirstOrDefault(w => w.WeddingId == WeddingID);
+                db.Weddings.Remove(getWedding);
+                db.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+            return View("Index");
+        }
 
-        // [HttpGet("/View/{WeddingId}")]
-        // public IActionResult View(int WeddingId)
-        // {
-        //     int? userId = HttpContext.Session.GetInt32("UserId");
-        //     if (userId != null)
-        //     {
-        //         ViewBag.WeddingDetail = db.Weddings
-        //             .Include(gr => gr.GuestReponses)
-        //                 .ThenInclude(g => g.Guest)
-        //                 .FirstOrDefault(p => p.WeddingId == WeddingId);
-        //         return View("Display");
-        //     }
-        //     return View("Index");
-        // }
+        [HttpGet("/View/{WeddingId}")]
+        public IActionResult View(int WeddingId)
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId != null)
+            {
+                ViewBag.WeddingDetail = db.Weddings
+                    .Include(gr => gr.GuestReponses)
+                        .ThenInclude(g => g.Guest)
+                        .FirstOrDefault(p => p.WeddingId == WeddingId);
+                return View("Display");
+            }
+            return View("Index");
+        }
 
-        // [HttpPost("logout")]
-        // public IActionResult LogOut()
-        // {
-        //     HttpContext.Session.Clear();
-        //     return View("Index");
-        // }
+        [HttpPost("logout")]
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return View("Index");
+        }
 
-        // [HttpPost("Create")]
-        // public IActionResult Create(Wedding newWedding)
-        // {
-        //     if(ModelState.IsValid)
-        //     {
-        //         newWedding.PlannerId = (int)HttpContext.Session.GetInt32("UserId");
-        //         db.Add(newWedding);
-        //         db.SaveChanges();
-        //         return RedirectToAction("Dashboard");
-        //     }
-        //     return View("Planner");
-        // }
+        [HttpPost("Create")]
+        public IActionResult Create(Wedding newWedding)
+        {
+            if(ModelState.IsValid)
+            {
+                newWedding.PlannerId = (int)HttpContext.Session.GetInt32("UserId");
+                db.Add(newWedding);
+                db.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+            return View("Planner");
+        }
 
         public IActionResult Privacy()
         {
