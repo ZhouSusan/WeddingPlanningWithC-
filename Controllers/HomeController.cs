@@ -87,6 +87,7 @@ namespace CSharpWeddingPlanner.Controllers
                     return RedirectToAction("Index");
                 }
                 int ? userId = HttpContext.Session.GetInt32("UserId");
+                ViewBag.CurrentUser = db.Users.FirstOrDefault(u => u.UserId == userId);
                 List<Wedding> AllWeddings = db.Weddings.Include(w => w.GuestReponses).OrderBy(u => u.Date).ToList();
                 ViewBag.UserId = (int)userId;
                 return View("Dashboard", AllWeddings);
