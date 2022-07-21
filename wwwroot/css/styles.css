@@ -3,12 +3,6 @@
     padding: 0;
 }
 
-body {
-    background-image:url('https://cdn.pixabay.com/photo/2018/02/22/14/58/nature-3173180_1280.jpg');
-    background-repeat:no-repeat;
-    background-attachment:fixed;
-}
-
 #newWeddingBtn {
     margin-bottom: 20px;
     color: lightseagreen;
