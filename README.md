@@ -1,4 +1,4 @@
-# WeddingPlanningWithC-
+# WeddingPlanning
 
 <h2>
   Wedding Planner
@@ -14,7 +14,7 @@
       </ul>
     </td>
     <td style="width:50%">
-        <img src="https://media.giphy.com/media/nKNYugt4VkkZTUJl9p/giphy.gif" alt="Wedding Planner"/>
+        <img src="https://media.giphy.com/media/9dwJIn1iWrAmmKBYHC/giphy.gif" alt="Wedding Planner"/>
     </td>
   </tr>
 </table>
